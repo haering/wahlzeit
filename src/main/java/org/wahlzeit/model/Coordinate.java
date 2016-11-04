@@ -3,7 +3,10 @@ package org.wahlzeit.model;
 import static java.lang.Math.*;
 
 
-
+/**
+ * Coordinate on the earth surface, which is assumed to be a sphere.
+ *
+ */
 public class Coordinate {
 	
 	/**
@@ -20,6 +23,15 @@ public class Coordinate {
 	 * Longitude given in a range between -180 and 180 degrees.
 	 */
 	private double longitude;
+	
+	
+	/**
+	 * Default Constructor needed for Google App Engine
+	 */
+	public Coordinate() {
+		latitude = 0;
+		longitude = 0;
+	}
 
 	public Coordinate(double latitude, double longitude) {
 		if(latitude > 90 || latitude < -90) {
@@ -48,7 +60,10 @@ public class Coordinate {
 		return longitude;
 	}
 	
-	
+	/**
+	 * Calculates the distance between this and the other Coordinate given
+	 * @return distance between this and other Coordinate in km
+	 */
 	public double getDistanceTo(Coordinate other) {
 		if(other == null) {
 			throw new NullPointerException();
