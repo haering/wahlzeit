@@ -43,12 +43,7 @@ import java.util.logging.Logger;
 /**
  * A photo manager provides access to and manages photos.
  */
-public class PhotoManager extends ObjectManager {
-
-	/**
-	 *
-	 */
-	protected static final PhotoManager instance = new PhotoManager();
+public abstract class PhotoManager extends ObjectManager {
 
 	private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
 
@@ -65,15 +60,15 @@ public class PhotoManager extends ObjectManager {
 	/**
 	 *
 	 */
-	public PhotoManager() {
-		photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
-	}
+//	public PhotoManager() {
+//		photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
+//	}
 
 	/**
 	 *
 	 */
-	public static final PhotoManager getInstance() {
-		return instance;
+	public static PhotoManager getInstance() {
+		return GamePhotoManager.getInstance();
 	}
 
 	/**
@@ -94,7 +89,7 @@ public class PhotoManager extends ObjectManager {
 	 *
 	 */
 	public final Photo getPhoto(PhotoId id) {
-		return instance.getPhotoFromId(id);
+		return getInstance().getPhotoFromId(id);
 	}
 
 	/**
@@ -108,7 +103,7 @@ public class PhotoManager extends ObjectManager {
 		Photo result = doGetPhotoFromId(id);
 
 		if (result == null) {
-			result = PhotoFactory.getInstance().loadPhoto(id);
+			result = GamePhotoFactory.getInstance().loadPhoto(id);
 			if (result != null) {
 				doAddPhoto(result);
 			}
