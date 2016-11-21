@@ -27,9 +27,9 @@ import org.wahlzeit.model.persistence.PersistenceTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
 	PersistenceTestSuite.class,
-	
+	CartesianCoordinateTest.class,
 	AccessRightsTest.class,
-	CoordinateTest.class,
+	SphericCoordinateTest.class,
 	FlagReasonTest.class,
 	GenderTest.class,
 	GuestTest.class,
