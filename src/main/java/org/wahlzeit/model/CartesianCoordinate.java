@@ -1,7 +1,7 @@
 package org.wahlzeit.model;
 
 
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate {
 	
 	/**
 	 * X coordinate
@@ -21,7 +21,6 @@ public class CartesianCoordinate implements Coordinate {
 		y = 0;
 		z =0;
 	}
-
 
 	public CartesianCoordinate(double x, double y, double z) {
 		this.x = x;
@@ -48,25 +47,6 @@ public class CartesianCoordinate implements Coordinate {
 	 */
 	public double getZ() {
 		return z;
-	}
-
-
-	@Override
-	public double getDistanceTo(Coordinate other) {
-		if (other == null) {
-			throw new NullPointerException();
-		}
-		if (!(other instanceof CartesianCoordinate)) {
-			throw new IllegalArgumentException("Can only get distance of Coordinates of the same type.");
-		}
-		
-		CartesianCoordinate ortherCart = (CartesianCoordinate) other;
-		double xDist = this.getX() - ortherCart.getX();
-		double yDist = this.getY() - ortherCart.getY();
-		double zDist = this.getZ() - ortherCart.getZ();
-
-		return Math.sqrt(xDist * xDist + yDist * yDist + zDist * zDist);
-
 	}
 
 }

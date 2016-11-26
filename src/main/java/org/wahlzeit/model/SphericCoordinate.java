@@ -6,7 +6,7 @@ import static java.lang.Math.*;
  * Coordinate on the earth surface, which is assumed to be a sphere.
  *
  */
-public class SphericCoordinate implements Coordinate {
+public class SphericCoordinate extends AbstractCoordinate {
 
 	/**
 	 * Earth radius of 6371 km.
@@ -16,14 +16,14 @@ public class SphericCoordinate implements Coordinate {
 	/**
 	 * Latitude given in a range between -90 and 90 degrees.
 	 */
-	private double latitude;
+	private final double latitude;
 
 	/**
 	 * Longitude given in a range between -180 and 180 degrees.
 	 */
-	private double longitude;
+	private final double longitude;
 
-	private double radius;
+	private final double radius;
 
 	/**
 	 * Default Constructor needed for Google App Engine
@@ -31,6 +31,7 @@ public class SphericCoordinate implements Coordinate {
 	public SphericCoordinate() {
 		latitude = 0;
 		longitude = 0;
+		radius = 0;
 	}
 
 	/**
@@ -85,18 +86,12 @@ public class SphericCoordinate implements Coordinate {
 	 * SphericCoordinate)
 	 */
 	@Override
-	public double getDistanceTo(Coordinate other) {
-		if (other == null) {
-			throw new NullPointerException();
-		}
-		if (!(other instanceof SphericCoordinate)) {
-			throw new IllegalArgumentException("Can only get distance of Coordinates of the same type.");
+	public double doGetDistanceTo(AbstractCoordinate other) {
+		if (!(other instanceof SphericCoordinate) || (radius != ((SphericCoordinate)other).getRadius())) {
+			return super.doGetDistanceTo(other);
 		}
 		SphericCoordinate otherCoordinate = (SphericCoordinate) other;
 
-		if(radius != otherCoordinate.getRadius()) {
-			throw new IllegalArgumentException("Radius of the Coordinates has to be the same.");
-		}
 		
 		double phi_1 = toRadians(latitude);
 		double phi_2 = toRadians(otherCoordinate.latitude);
@@ -105,7 +100,21 @@ public class SphericCoordinate implements Coordinate {
 
 		double distanceAngle = acos(sin(phi_1) * sin(phi_2) + (cos(phi_1) * cos(phi_2) * cos(lambda_2 - lambda_1)));
 		return radius * distanceAngle;
-
+	}
+	
+	@Override
+	protected double getX() {
+		return radius * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(longitude));
+	}
+	
+	@Override
+	protected double getY() {
+		return radius * Math.cos(Math.toRadians(latitude)) * Math.sin(Math.toRadians(longitude));
+	}
+	
+	@Override
+	protected double getZ() {
+		return radius * Math.sin(Math.toRadians(latitude));
 	}
 
 }

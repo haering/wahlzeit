@@ -9,9 +9,9 @@ public class SphericCoordinateTest {
 	private static final double DELTA = 0.001;
 	private static final double EARTH_PERIMETER = SphericCoordinate.EARTH_RADIUS * 2 * Math.PI;
 	private Coordinate north;
-	private SphericCoordinate south;
+	private AbstractCoordinate south;
 	private SphericCoordinate zero;
-	private SphericCoordinate mostWest;
+	private AbstractCoordinate mostWest;
 	private SphericCoordinate mostEast;
 	private Coordinate middleWest;
 
@@ -71,9 +71,16 @@ public class SphericCoordinateTest {
 		new SphericCoordinate(0, -181);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testDiffrentRadiusLength() {
-		zero.getDistanceTo(new SphericCoordinate(1, 2, 3));
+		Assert.assertEquals(6671.0,north.getDistanceTo(new SphericCoordinate(-90, 0,300)), DELTA);
+	}
+	
+	@Test
+	public void testIsEqual() {
+		Assert.assertTrue(north.isEqual(north));
+		Assert.assertFalse(north.isEqual(south));
+		Assert.assertTrue(north.isEqual(new CartesianCoordinate(0, 0, SphericCoordinate.EARTH_RADIUS)));
 	}
 
 

@@ -11,5 +11,6 @@ public interface Coordinate {
 	 * @return distance between this and other Coordinate in km
 	 */
 	double getDistanceTo(Coordinate other);
+	boolean isEqual(Coordinate other);
 
 }
