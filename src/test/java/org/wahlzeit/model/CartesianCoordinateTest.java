@@ -22,14 +22,14 @@ public class CartesianCoordinateTest {
 
 	@Test
 	public void testOverlapDistance() {
-		Assert.assertEquals(15.588, zero.getDistanceTo(otherPoint), DELTA);
+		Assert.assertEquals(15.588, zero.getDistance(otherPoint), DELTA);
 	}
 
 
 	@Test
 	public void testSamePointDistance() {
 
-		Assert.assertEquals(0, zero.getDistanceTo(zero), DELTA);
+		Assert.assertEquals(0, zero.getDistance(zero), DELTA);
 	}
 
 	@Test()

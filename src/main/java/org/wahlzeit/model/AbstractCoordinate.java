@@ -6,7 +6,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 		super();
 	}
 
-	public final double getDistanceTo(Coordinate other) {
+	public final double getDistance(Coordinate other) {
 		if (other == null) {
 			throw new NullPointerException();
 		}
@@ -14,10 +14,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 			throw new IllegalArgumentException("Unknown type of Coordinate");
 		}
 		AbstractCoordinate otherAbstract = (AbstractCoordinate) other;
-		return doGetDistanceTo(otherAbstract);
+		return doGetDistance(otherAbstract);
 	}
 
-	protected double doGetDistanceTo(AbstractCoordinate other) {
+	protected double doGetDistance(AbstractCoordinate other) {
 		double xDist = this.getX() - other.getX();
 		double yDist = this.getY() - other.getY();
 		double zDist = this.getZ() - other.getZ();
@@ -27,7 +27,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	
 	@Override
 	public boolean isEqual(Coordinate other) {
-		return this.getDistanceTo(other) < 0.005;
+		return this.getDistance(other) < 0.005;
 	}
 	
 	protected abstract double getX();

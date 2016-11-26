@@ -27,28 +27,28 @@ public class SphericCoordinateTest {
 
 	@Test
 	public void testPoleToPoleDistance() {
-		Assert.assertEquals(EARTH_PERIMETER / 2, north.getDistanceTo(south), DELTA);
+		Assert.assertEquals(EARTH_PERIMETER / 2, north.getDistance(south), DELTA);
 	}
 
 	@Test
 	public void testOverlapDistance() {
-		Assert.assertEquals(0, mostWest.getDistanceTo(mostEast), DELTA);
+		Assert.assertEquals(0, mostWest.getDistance(mostEast), DELTA);
 	}
 
 	@Test
 	public void testMostWestToZeroDistance() {
-		Assert.assertEquals(EARTH_PERIMETER / 2, zero.getDistanceTo(mostEast), DELTA);
+		Assert.assertEquals(EARTH_PERIMETER / 2, zero.getDistance(mostEast), DELTA);
 	}
 	
 	@Test
 	public void testDistanceFrom() {
-		Assert.assertEquals(EARTH_PERIMETER/4, middleWest.getDistanceTo(mostWest),DELTA);
+		Assert.assertEquals(EARTH_PERIMETER/4, middleWest.getDistance(mostWest),DELTA);
 	}
 
 	@Test
 	public void testSamePointDistance() {
 
-		Assert.assertEquals(0, zero.getDistanceTo(zero), DELTA);
+		Assert.assertEquals(0, zero.getDistance(zero), DELTA);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -73,7 +73,7 @@ public class SphericCoordinateTest {
 	
 	@Test
 	public void testDiffrentRadiusLength() {
-		Assert.assertEquals(6671.0,north.getDistanceTo(new SphericCoordinate(-90, 0,300)), DELTA);
+		Assert.assertEquals(6671.0,north.getDistance(new SphericCoordinate(-90, 0,300)), DELTA);
 	}
 	
 	@Test

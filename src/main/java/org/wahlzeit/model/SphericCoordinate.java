@@ -86,9 +86,9 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * SphericCoordinate)
 	 */
 	@Override
-	public double doGetDistanceTo(AbstractCoordinate other) {
+	public double doGetDistance(AbstractCoordinate other) {
 		if (!(other instanceof SphericCoordinate) || (radius != ((SphericCoordinate)other).getRadius())) {
-			return super.doGetDistanceTo(other);
+			return super.doGetDistance(other);
 		}
 		SphericCoordinate otherCoordinate = (SphericCoordinate) other;
 
