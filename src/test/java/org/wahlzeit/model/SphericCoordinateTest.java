@@ -51,22 +51,22 @@ public class SphericCoordinateTest {
 		Assert.assertEquals(0, zero.getDistance(zero), DELTA);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = AssertionError.class)
 	public void testInvalidArguments1() {
 		new SphericCoordinate(-91, 0);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = AssertionError.class)
 	public void testInvalidArguments2() {
 		new SphericCoordinate(91, 0);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = AssertionError.class)
 	public void testInvalidArguments3() {
 		new SphericCoordinate(0, 181);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = AssertionError.class)
 	public void testInvalidArguments4() {
 		new SphericCoordinate(0, -181);
 	}
