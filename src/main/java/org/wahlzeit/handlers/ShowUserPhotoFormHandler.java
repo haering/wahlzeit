@@ -23,6 +23,7 @@ package org.wahlzeit.handlers;
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.ModelConfig;
 import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoComponentException;
 import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.User;
@@ -34,6 +35,7 @@ import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -110,7 +112,11 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 					addParameter("Photo", id).toString());
 		} else if (us.isFormType(args, "delete")) {
 			photo.setStatus(photo.getStatus().asDeleted(true));
-			PhotoManager.getInstance().savePhoto(photo);
+			try {
+				PhotoManager.getInstance().savePhoto(photo);
+			} catch (PhotoComponentException e) {
+				log.log(Level.SEVERE, LogBuilder.createSystemMessage().addMessage("Something went wrong").toString(), e);
+			}
 			if (user.getUserPhoto() == photo) {
 				user.setUserPhoto(null);
 				userManager.saveClient(user);

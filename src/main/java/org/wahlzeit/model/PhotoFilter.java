@@ -248,7 +248,11 @@ public class PhotoFilter implements Serializable {
 			List<Tag> tags = new LinkedList<Tag>();
 			candidates = new LinkedList<PhotoId>();
 			for (String condition : getFilterConditions()) {
-				PhotoManager.getInstance().addTagsThatMatchCondition(tags, condition);
+				try {
+					PhotoManager.getInstance().addTagsThatMatchCondition(tags, condition);
+				} catch (PhotoComponentException e) {
+					continue;
+				}
 			}
 			// get the list of all photo ids that correspond to the tags
 			for (Tag tag : tags) {

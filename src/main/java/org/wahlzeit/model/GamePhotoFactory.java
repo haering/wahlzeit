@@ -55,10 +55,11 @@ public class GamePhotoFactory extends PhotoFactory {
 
 	/**
 	 * Creates a new photo with the specified id
+	 * @throws PhotoComponentException 
 	 * @methodtype factory
 	 */
 	@Override
-	public Photo createPhoto(PhotoId id) {
+	public Photo createPhoto(PhotoId id) throws PhotoComponentException {
 		return new GamePhoto(id);
 	}
 

@@ -24,7 +24,7 @@ public class GamePhoto extends Photo {
 		super();
 	}
 
-	public GamePhoto(PhotoId myId) {
+	public GamePhoto(PhotoId myId) throws PhotoComponentException {
 		super(myId);
 	}
 	

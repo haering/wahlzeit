@@ -24,6 +24,7 @@ import org.wahlzeit.model.GamePhotoFactory;
 import org.wahlzeit.model.GamePhotoManager;
 import org.wahlzeit.model.GlobalsManager;
 import org.wahlzeit.model.PhotoCaseManager;
+import org.wahlzeit.model.PhotoComponentException;
 import org.wahlzeit.model.PhotoFactory;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.User;
@@ -79,9 +80,10 @@ public abstract class ModelMain extends AbstractMain {
 	}
 
 	/**
+	 * @throws PhotoComponentException 
 	 *
 	 */
-	public void saveAll() throws IOException{
+	public void saveAll() throws PhotoComponentException{
 		PhotoCaseManager.getInstance().savePhotoCases();
 		PhotoManager.getInstance().savePhotos();
 		UserManager.getInstance().saveClients();

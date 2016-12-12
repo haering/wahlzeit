@@ -8,7 +8,17 @@ public abstract class AbstractCoordinate implements Coordinate {
 		super();
 	}
 
-	public final double getDistance(Coordinate other) {
+	public final double getDistance(Coordinate other) throws CoordinateException {
+		try {
+			return doGetDistance(other);
+		} catch (Throwable e) {
+			throw new CoordinateException("getDistance Exception caught",e);
+		}
+		
+	}
+
+	protected double doGetDistance(Coordinate other) {
+		
 		if (other == null) {
 			throw new NullPointerException();
 		}
@@ -20,29 +30,30 @@ public abstract class AbstractCoordinate implements Coordinate {
 		assertClassInvariant();
 		otherAbstract.assertClassInvariant();
 		
-		double distance =  doGetDistance(otherAbstract);
+		
+		double xDist = this.getX() - otherAbstract.getX();
+		double yDist = this.getY() - otherAbstract.getY();
+		double zDist = this.getZ() - otherAbstract.getZ();
+
+		double distance =  Math.sqrt(xDist * xDist + yDist * yDist + zDist * zDist);
 		
 		if(distance < 0 ) {
 			throw new InvalidValueException("distance has to be positive"); 
 		}
+		
+		
 		
 		assertClassInvariant();
 		otherAbstract.assertClassInvariant();
 		
 		return distance;
 	}
-
-	protected double doGetDistance(AbstractCoordinate other) {
-		double xDist = this.getX() - other.getX();
-		double yDist = this.getY() - other.getY();
-		double zDist = this.getZ() - other.getZ();
-
-		return Math.sqrt(xDist * xDist + yDist * yDist + zDist * zDist);
-	}
 	
 	@Override
-	public boolean isEqual(Coordinate other) {
-		assert other != null : new NullPointerException("other cannot be null");
+	public boolean isEqual(Coordinate other) throws CoordinateException {
+		if(other == null){
+			throw new CoordinateException(new NullPointerException("other cannot be null"));
+		}
 		return this.getDistance(other) < 0.005;
 	}
 	

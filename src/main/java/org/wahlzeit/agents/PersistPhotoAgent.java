@@ -1,6 +1,7 @@
 package org.wahlzeit.agents;
 
 import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoComponentException;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.services.LogBuilder;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -33,7 +35,11 @@ public class PersistPhotoAgent extends HttpServlet {
 		if (id != null && !"".equals(id)) {
 			Photo photo = PhotoManager.getInstance().getPhoto(id);
 			if (photo != null) {
-				PhotoManager.getInstance().savePhoto(photo);
+				try {
+					PhotoManager.getInstance().savePhoto(photo);
+				} catch (PhotoComponentException e) {
+					log.log(Level.SEVERE	, LogBuilder.createSystemMessage().addMessage("Something went wrong").toString(), e);
+				}
 				log.config(LogBuilder.createSystemMessage().addMessage("Photo saved.").toString());
 			} else {
 				response.setStatus(299);

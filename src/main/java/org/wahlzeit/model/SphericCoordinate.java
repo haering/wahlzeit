@@ -44,19 +44,19 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public SphericCoordinate(double latitude, double longitude) {
+	public SphericCoordinate(double latitude, double longitude)  throws CoordinateException {
 		this(latitude, longitude, EARTH_RADIUS);
 	}
 
-	public SphericCoordinate(double latitude, double longitude, double radius) {
+	public SphericCoordinate(double latitude, double longitude, double radius)  throws CoordinateException {
 		if (latitude > 90 || latitude < -90) {
-			throw new IllegalArgumentException("Latitude has to be between -90Â° and 90Â°.");
+			throw new CoordinateException(new IllegalArgumentException("Latitude has to be between -90° and 90°."));
 		}
 		if (longitude > 180 || longitude < -180) {
-			throw new IllegalArgumentException("Longitude has to be between -180Â° and 180Â°.");
+			throw new CoordinateException(new IllegalArgumentException("Longitude has to be between -180° and 180°."));
 		}
 		if (radius < 0) {
-			throw new IllegalArgumentException("Radius has to be > 0.");
+			throw new CoordinateException(new IllegalArgumentException("Radius has to be > 0."));
 		}
 		
 		this.latitude = latitude;

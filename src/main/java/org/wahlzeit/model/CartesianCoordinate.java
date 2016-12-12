@@ -21,9 +21,9 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		z = 0;
 	}
 
-	public CartesianCoordinate(double x, double y, double z) {
+	public CartesianCoordinate(double x, double y, double z)  throws CoordinateException {
 		if( Double.isNaN(x) || Double.isNaN(y) || Double.isNaN(z)) {
-			throw new IllegalArgumentException("Component is NaN");
+			throw  new CoordinateException(new IllegalArgumentException("Component is NaN"));
 		}
 
 		this.x = x;

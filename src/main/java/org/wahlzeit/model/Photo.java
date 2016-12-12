@@ -146,9 +146,13 @@ public class Photo extends DataObject {
 	}
 
 	/**
+	 * @throws PhotoComponentException 
 	 * @methodtype constructor
 	 */
-	public Photo(PhotoId myId) {
+	public Photo(PhotoId myId) throws PhotoComponentException {
+		if(id == null) {
+			throw new PhotoComponentException(new IllegalArgumentException("PhotoID must be non null"));
+		}
 		id = myId;
 
 		incWriteCount();

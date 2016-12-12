@@ -14,26 +14,26 @@ public class CartesianCoordinateTest {
 
 
 	@Before
-	public void setup() {
+	public void setup() throws CoordinateException {
 
 		zero = new CartesianCoordinate(0, 0, 0);
 		otherPoint = new CartesianCoordinate(9, 9 , 9);
 	}
 
 	@Test
-	public void testOverlapDistance() {
+	public void testOverlapDistance() throws CoordinateException {
 		Assert.assertEquals(15.588, zero.getDistance(otherPoint), DELTA);
 	}
 
 
 	@Test
-	public void testSamePointDistance() {
+	public void testSamePointDistance() throws CoordinateException {
 
 		Assert.assertEquals(0, zero.getDistance(zero), DELTA);
 	}
 
 	@Test()
-	public void testConstructor() {
+	public void testConstructor() throws CoordinateException {
 		CartesianCoordinate cartesianCoordinate = new CartesianCoordinate(123, 456, 789);
 		assertEquals(123, cartesianCoordinate.getX(),DELTA);
 		assertEquals(456, cartesianCoordinate.getY(),DELTA);

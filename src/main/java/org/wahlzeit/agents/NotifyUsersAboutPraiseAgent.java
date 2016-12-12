@@ -4,6 +4,7 @@ import com.google.apphosting.api.ApiProxy;
 import org.wahlzeit.model.LanguageConfigs;
 import org.wahlzeit.model.ModelConfig;
 import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoComponentException;
 import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.User;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -58,7 +60,11 @@ public class NotifyUsersAboutPraiseAgent extends Agent {
 					arrayListOfPhotos.add(photo);
 					ownerIdPhotosMap.put(ownerId, arrayListOfPhotos);
 					photo.setNoNewPraise();
-					PhotoManager.getInstance().savePhoto(photo);
+					try {
+						PhotoManager.getInstance().savePhoto(photo);
+					} catch (PhotoComponentException e) {
+						log.log(Level.SEVERE, LogBuilder.createSystemMessage().addMessage("Something went wrong").toString(), e);
+					}
 				}
 			}
 		}

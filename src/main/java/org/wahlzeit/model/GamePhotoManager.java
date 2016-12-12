@@ -54,26 +54,4 @@ public class GamePhotoManager extends PhotoManager {
 
 		log.info(LogBuilder.createSystemMessage().addMessage("All photos loaded.").toString());
 	}
-
-	@Override
-	public void savePhoto(Photo photo) {
-		super.savePhoto(photo);
-	}
-
-	@Override
-	public void savePhotos() throws IOException {
-		super.savePhotos();
-	}
-
-	@Override
-	public Photo createPhoto(String filename, Image uploadedImage) throws Exception {
-		return super.createPhoto(filename, uploadedImage);
-	}
-
-	@Override
-	public void addPhoto(Photo photo) throws IOException {
-		// TODO Auto-generated method stub
-		super.addPhoto(photo);
-	}	
-
 }

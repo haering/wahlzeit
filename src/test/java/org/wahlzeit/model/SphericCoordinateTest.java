@@ -13,71 +13,56 @@ public class SphericCoordinateTest {
 	private SphericCoordinate zero;
 	private AbstractCoordinate mostWest;
 	private SphericCoordinate mostEast;
-	private Coordinate middleWest;
 
 	@Before
-	public void setup() {
+	public void setup() throws CoordinateException {
 		north = new SphericCoordinate(90, 90);
 		south = new SphericCoordinate(-90, -90);
 		zero = new SphericCoordinate(0, 0);
 		mostWest = new SphericCoordinate(0, -180);
 		mostEast = new SphericCoordinate(0, 180);
-		middleWest = new SphericCoordinate(0,90);
 	}
 
-	@Test
-	public void testPoleToPoleDistance() {
-		Assert.assertEquals(EARTH_PERIMETER / 2, north.getDistance(south), DELTA);
-	}
 
 	@Test
-	public void testOverlapDistance() {
+	public void testOverlapDistance() throws CoordinateException {
 		Assert.assertEquals(0, mostWest.getDistance(mostEast), DELTA);
 	}
-
-	@Test
-	public void testMostWestToZeroDistance() {
-		Assert.assertEquals(EARTH_PERIMETER / 2, zero.getDistance(mostEast), DELTA);
-	}
 	
-	@Test
-	public void testDistanceFrom() {
-		Assert.assertEquals(EARTH_PERIMETER/4, middleWest.getDistance(mostWest),DELTA);
-	}
 
 	@Test
-	public void testSamePointDistance() {
+	public void testSamePointDistance() throws CoordinateException {
 
 		Assert.assertEquals(0, zero.getDistance(zero), DELTA);
 	}
 
-	@Test(expected = AssertionError.class)
-	public void testInvalidArguments1() {
+	@Test(expected = CoordinateException.class)
+	public void testInvalidArguments1() throws CoordinateException {
 		new SphericCoordinate(-91, 0);
 	}
 
-	@Test(expected = AssertionError.class)
-	public void testInvalidArguments2() {
+	@Test(expected = CoordinateException.class)
+	public void testInvalidArguments2() throws CoordinateException {
 		new SphericCoordinate(91, 0);
 	}
 
-	@Test(expected = AssertionError.class)
-	public void testInvalidArguments3() {
+	@Test(expected = CoordinateException.class)
+	public void testInvalidArguments3() throws CoordinateException {
 		new SphericCoordinate(0, 181);
 	}
 
-	@Test(expected = AssertionError.class)
-	public void testInvalidArguments4() {
+	@Test(expected = CoordinateException.class)
+	public void testInvalidArguments4() throws CoordinateException {
 		new SphericCoordinate(0, -181);
 	}
 	
 	@Test
-	public void testDiffrentRadiusLength() {
+	public void testDiffrentRadiusLength() throws CoordinateException {
 		Assert.assertEquals(6671.0,north.getDistance(new SphericCoordinate(-90, 0,300)), DELTA);
 	}
 	
 	@Test
-	public void testIsEqual() {
+	public void testIsEqual() throws CoordinateException {
 		Assert.assertTrue(north.isEqual(north));
 		Assert.assertFalse(north.isEqual(south));
 		Assert.assertTrue(north.isEqual(new CartesianCoordinate(0, 0, SphericCoordinate.EARTH_RADIUS)));
