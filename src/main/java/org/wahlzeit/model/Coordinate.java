@@ -11,7 +11,7 @@ public interface Coordinate {
 	 * @return distance between this and other Coordinate in km
 	 * @throws CoordinateException 
 	 */
-	double getDistance(Coordinate other) throws CoordinateException;
-	boolean isEqual(Coordinate other) throws CoordinateException;
+	double getDistance(Coordinate other);
+	boolean isEqual(Coordinate other);
 
 }

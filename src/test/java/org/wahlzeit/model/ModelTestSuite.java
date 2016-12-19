@@ -36,7 +36,8 @@ import org.wahlzeit.model.persistence.PersistenceTestSuite;
 	PhotoFilterTest.class,
 	TagsTest.class,
 	UserStatusTest.class,
-	ValueTest.class	
+	ValueTest.class,
+	CoordinateFactoryTest.class
 })
 public class ModelTestSuite {
 	/** do nothing */

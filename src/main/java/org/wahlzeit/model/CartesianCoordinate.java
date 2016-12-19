@@ -15,15 +15,15 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 */
 	private final double z;
 
-	public CartesianCoordinate() {
+	private CartesianCoordinate() {
 		x = 0;
 		y = 0;
 		z = 0;
 	}
 
-	public CartesianCoordinate(double x, double y, double z)  throws CoordinateException {
+	private CartesianCoordinate(Double x, Double y, Double z) {
 		if( Double.isNaN(x) || Double.isNaN(y) || Double.isNaN(z)) {
-			throw  new CoordinateException(new IllegalArgumentException("Component is NaN"));
+			throw  new IllegalArgumentException("Component is NaN");
 		}
 
 		this.x = x;
@@ -63,5 +63,23 @@ public class CartesianCoordinate extends AbstractCoordinate {
 			throw new IllegalStateException("Component is NaN");
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(z);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+
+	
+	
 
 }

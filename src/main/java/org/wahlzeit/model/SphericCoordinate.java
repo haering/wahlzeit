@@ -1,6 +1,5 @@
 package org.wahlzeit.model;
 
-import static java.lang.Math.acos;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;
@@ -14,7 +13,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	/**
 	 * Earth radius of 6371 km.
 	 */
-	public static final float EARTH_RADIUS = 6371;
+	public static final double EARTH_RADIUS = 6371;
 
 	/**
 	 * Latitude given in a range between -90 and 90 degrees.
@@ -31,7 +30,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	/**
 	 * Default Constructor needed for Google App Engine
 	 */
-	public SphericCoordinate() {
+	private SphericCoordinate() {
 		latitude = 0;
 		longitude = 0;
 		radius = 0;
@@ -44,25 +43,25 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public SphericCoordinate(double latitude, double longitude)  throws CoordinateException {
+	private SphericCoordinate(Double latitude, Double longitude) {
 		this(latitude, longitude, EARTH_RADIUS);
 	}
 
-	public SphericCoordinate(double latitude, double longitude, double radius)  throws CoordinateException {
+	private SphericCoordinate(Double latitude, Double longitude, Double radius) {
 		if (latitude > 90 || latitude < -90) {
-			throw new CoordinateException(new IllegalArgumentException("Latitude has to be between -90° and 90°."));
+			throw new IllegalArgumentException("Latitude has to be between -90° and 90°.");
 		}
 		if (longitude > 180 || longitude < -180) {
-			throw new CoordinateException(new IllegalArgumentException("Longitude has to be between -180° and 180°."));
+			throw new IllegalArgumentException("Longitude has to be between -180° and 180°.");
 		}
 		if (radius < 0) {
-			throw new CoordinateException(new IllegalArgumentException("Radius has to be > 0."));
+			throw new IllegalArgumentException("Radius has to be > 0.");
 		}
-		
+
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.radius = radius;
-		
+
 		assertClassInvariant();
 	}
 
@@ -89,19 +88,19 @@ public class SphericCoordinate extends AbstractCoordinate {
 		assertClassInvariant();
 		return radius;
 	}
-	
+
 	@Override
 	protected double getX() {
 		assertClassInvariant();
 		return radius * cos(toRadians(latitude)) * cos(toRadians(longitude));
 	}
-	
+
 	@Override
 	protected double getY() {
 		assertClassInvariant();
 		return radius * cos(toRadians(latitude)) * sin(toRadians(longitude));
 	}
-	
+
 	@Override
 	protected double getZ() {
 		assertClassInvariant();
@@ -118,6 +117,29 @@ public class SphericCoordinate extends AbstractCoordinate {
 		if (radius < 0) {
 			throw new IllegalStateException("Radius has to be > 0.");
 		}
+	}
+
+	@Override
+	public String toString() {
+		return buildString(latitude, longitude, radius);
+	}
+
+	private String buildString(double latitude, double longitude, double radius) {
+		return latitude + "," + longitude + "," + radius;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(latitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(longitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(radius);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
 
 }
