@@ -1,5 +1,9 @@
 package org.wahlzeit.model;
 
+
+@PatternInstance(
+		patternName = "Value Object",
+		participants = "CartesianCoordinate")
 public class CartesianCoordinate extends AbstractCoordinate {
 
 	/**

@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 import com.sun.org.apache.bcel.internal.generic.ClassGenException;
 
+@PatternInstance(
+		patternName="Template Method",
+		participants = {"AbstractCoordinate", "All Subclasses of AbstractCoordinate"}
+		)
 public abstract class AbstractCoordinate implements Coordinate {
 
 	public AbstractCoordinate() {
@@ -57,6 +61,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 
 	protected abstract void assertClassInvariant();
 
+	@PatternInstance(
+			patternName="Abstract Factory",
+			participants = { "CoordinateFactory", "SphericCoordinate", "AbstractCoordinate", "CartessianCoordinate"}
+			)
 	public static class CoordinateFactory {
 
 		private final static HashMap<String, Coordinate> createdCoordinates = new HashMap<>();

@@ -11,6 +11,9 @@ import com.google.appengine.api.images.Image;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
 
+@PatternInstance (
+		patternName = "Singleton",
+		participants = "GamePhotoManager")
 public class GamePhotoManager extends PhotoManager {
 	
 	/**

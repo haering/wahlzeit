@@ -8,6 +8,9 @@ import static java.lang.Math.toRadians;
  * Coordinate on the earth surface, which is assumed to be a sphere.
  *
  */
+@PatternInstance(
+		patternName = "Value Object",
+		participants = "SphericCoordinate")
 public class SphericCoordinate extends AbstractCoordinate {
 
 	/**
