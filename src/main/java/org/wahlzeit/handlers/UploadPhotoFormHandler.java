@@ -78,7 +78,11 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			User user = (User) us.getClient();
 			Image uploadedImage = user.getUploadedImage();
 			Photo photo = pm.createPhoto(fileName, uploadedImage);
-
+			/* 
+			 *	Hier müsste dem Photo noch zusätzlich das Spiel übergeben werden,
+			 *	dessen Typ durch weitere Eingabefelder in der GUI ausgewählt wird.
+			 */
+			
 			user.addPhoto(photo);
 
 			photo.setTags(new Tags(tags));

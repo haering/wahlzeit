@@ -6,8 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.wahlzeit.model.AbstractCoordinate.CoordinateFactory;
 
-import com.sun.org.apache.bcel.internal.generic.ClassGenException;
-
 public class CoordinateFactoryTest {
 
 	private static final double DELTA = 0.001;
@@ -35,7 +33,7 @@ public class CoordinateFactoryTest {
 		Assert.assertNotSame(coord1, coord2);
 	}
 
-	@Test(expected = ClassGenException.class)
+	@Test(expected = RuntimeException.class)
 	public void testWrongParamCount() {
 		CoordinateFactory.createCoordinate(CartesianCoordinate.class, 0);
 	}

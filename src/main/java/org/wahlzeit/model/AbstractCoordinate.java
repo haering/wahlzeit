@@ -4,8 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
-import com.sun.org.apache.bcel.internal.generic.ClassGenException;
-
 @PatternInstance(
 		patternName="Template Method",
 		participants = {"AbstractCoordinate", "All Subclasses of AbstractCoordinate"}
@@ -115,7 +113,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 							}
 						}
 						if(coordinate == null) {
-							throw new ClassGenException("No Constructor matching the given Signature");
+							throw new RuntimeException("No Constructor matching the given Signature");
 						}
 					}
 				}

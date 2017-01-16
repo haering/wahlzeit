@@ -17,29 +17,36 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
+
 package org.wahlzeit.model;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-import org.wahlzeit.model.persistence.PersistenceTestSuite;
+import java.util.Date;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-	PersistenceTestSuite.class,
-	CartesianCoordinateTest.class,
-	AccessRightsTest.class,
-	SphericCoordinateTest.class,
-	FlagReasonTest.class,
-	GenderTest.class,
-	GuestTest.class,
-	PhotoFilterTest.class,
-	TagsTest.class,
-	UserStatusTest.class,
-	ValueTest.class,
-	CoordinateFactoryTest.class,
-	GameManagerTest.class
-})
-public class ModelTestSuite {
-	/** do nothing */
+public class Game {
+
+	
+	private GameType gameType;
+	
+	private Game() {
+	}
+	
+	Game(GameType gameType) {
+		this.gameType = gameType;
+	}
+	
+	public void setGameType(GameType gameType) {
+		this.gameType = gameType;
+	}
+	
+	public String getName() {
+		return gameType.getName();
+	}
+	
+	public String getGenre() {
+		return gameType.getGenre();
+	}
+	
+	public Date getReleaseDate() {
+		return gameType.getRelease();
+	}
 }

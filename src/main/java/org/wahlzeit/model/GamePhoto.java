@@ -9,16 +9,9 @@ public class GamePhoto extends Photo {
 	 * 
 	 */
 	private static final long serialVersionUID = 3051254939534110507L;
+		
+	private Game game;
 	
-	private String gameName ="";
-	
-	private String gameGenre ="";
-	
-	public enum Platform {
-		PC, XBOX_ONE, PS4, WII_U, WII, XBOX360, PS3, N64, NES, UNKNOWN
-	}
-	
-	private Platform gamePlatform = Platform.UNKNOWN;
 	
 	public GamePhoto() {
 		super();
@@ -29,28 +22,20 @@ public class GamePhoto extends Photo {
 	}
 	
 	public String getGameName() {
-		return gameName;
+		return game.getName();
 	}
 	
-	public void setGameName(String gameName) {
-		this.gameName = gameName;
-	}
-
 	public String getGameGenre() {
-		return gameGenre;
-	}
-
-	public void setGameGenre(String gameGenre) {
-		this.gameGenre = gameGenre;
-	}
-
-	public Platform getGamePlatform() {
-		return gamePlatform;
-	}
-
-	public void setGamePlatform(Platform gamePlatform) {
-		this.gamePlatform = gamePlatform;
+		return game.getGenre();
 	}
 	
+
 	
+	public void setGame(Game game) {
+		this.game = game;
+	}
+	
+	public Game getGame() {
+		return game;
+	}
 }
